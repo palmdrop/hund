@@ -1,0 +1,54 @@
+:root {
+  /*
+  --font-sans: Helvetica, Arial, sans-serif;
+  */
+  --font-serif: 'Times New Roman', Times, serif;
+  --font-sans: Helvetica, Arial, sans-serif;
+
+  --max-font-size: 100px;
+  --min-font-size: 60px;
+  --line-height: 1.2em;
+
+  --max-width: 25em;
+  --canvas-padding: 4.9rem;
+
+  --font-size: 13vw;
+  /* clamp(var(--min-font-size), 3vw, var(--max-font-size)); */
+}
+
+html {
+  font-size: var(--font-size);
+  font-family: var(--font-sans);
+
+  background-color: white;
+
+  text-transform: uppercase;
+}
+
+html,
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+main {
+  line-height: var(--line-height);
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+
+  position: relative;
+}
+
+.hund {
+  display: inline-block;
+  width: 100%;
+  background-color: black;
+  color: white;
+
+  text-transform: uppercase;
+}
+
+.rest {
+}
