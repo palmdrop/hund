@@ -3,7 +3,7 @@ import fs from 'fs/promises';
 const POEM_DIRECTORY = './src/content';
 const POEM_PATH = `${POEM_DIRECTORY}/hund.md`;
 
-const HUND_REGEX = /^.*?(h|H)und\S*/g;
+const START_REGEX = /^.*?(h|H)und\S*/g;
 
 const parsePoem = async () => {
   const content = await fs.readFile(POEM_PATH, 'utf-8');
@@ -11,7 +11,7 @@ const parsePoem = async () => {
     .split('\n')
     .filter(line => !!line.trim().length)
     .map(line => {
-      const start = line.match(HUND_REGEX)?.[0];
+      const start = line.match(START_REGEX)?.[0];
       if (!start) return [line, ''];
 
       return [start, line.slice(start.length).trim()];

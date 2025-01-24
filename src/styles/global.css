@@ -1,26 +1,31 @@
 :root {
   /*
   --font-sans: Helvetica, Arial, sans-serif;
+  --font-serif: 'Times New Roman', Times, serif;
   */
   --font-serif: 'Times New Roman', Times, serif;
   --font-sans: Helvetica, Arial, sans-serif;
 
   --max-font-size: 100px;
   --min-font-size: 60px;
-  --line-height: 1.2em;
+  --line-height: 1em;
 
   --max-width: 25em;
   --canvas-padding: 4.9rem;
 
-  --font-size: 13vw;
+  --font-size: 12vw;
   /* clamp(var(--min-font-size), 3vw, var(--max-font-size)); */
+
+  --background-color: white;
+  --foreground-color: black;
 }
 
 html {
   font-size: var(--font-size);
   font-family: var(--font-sans);
 
-  background-color: white;
+  background-color: var(--background-color);
+  color: var(--foreground-color);
 
   text-transform: uppercase;
 }
@@ -34,21 +39,32 @@ html,
 
 main {
   line-height: var(--line-height);
-  max-width: var(--max-width);
-  margin-left: auto;
-  margin-right: auto;
-
   position: relative;
+
+  padding: 0.2em;
 }
 
-.hund {
+.line {
+}
+
+.start {
   display: inline-block;
   width: 100%;
-  background-color: black;
-  color: white;
 
   text-transform: uppercase;
 }
 
 .rest {
+}
+
+.dog {
+  font-family: var(--font-serif);
+  font-size: 1.05em;
+  font-style: italic;
+
+  /*
+  background-color: var(--foreground-color);
+  color: var(--background-color);
+  */
+  text-shadow: 0px 0px 0.1em var(--foreground-color);
 }
