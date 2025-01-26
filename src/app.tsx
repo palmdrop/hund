@@ -7,6 +7,8 @@ import { onMount, onCleanup, createSignal, createMemo } from 'solid-js';
 
 const DOG_WORD = 'HUND';
 
+const ANIMATION_SPEED = 500;
+
 const splitOnDog = (text: string) => {
   const dogIndices: number[] = [];
   let index = 0;
@@ -40,8 +42,6 @@ const lines = poem.lines.map(line =>
   line.map(part => part.toUpperCase()).map(splitOnDog)
 );
 
-console.log(lines);
-
 export default function App() {
   const [index, setIndex] = createSignal(0);
 
@@ -49,10 +49,14 @@ export default function App() {
     return lines[index()];
   });
 
+  const progression = createMemo(() => {
+    return index() / (poem.lines.length - 1);
+  });
+
   onMount(() => {
     const interval = setInterval(() => {
       setIndex(index => (index + 1) % poem.lines.length);
-    }, 500);
+    }, ANIMATION_SPEED);
 
     onCleanup(() => {
       clearInterval(interval);
@@ -72,7 +76,8 @@ export default function App() {
   };
 
   return (
-    <main>
+    <main style={`--speed: ${ANIMATION_SPEED}ms;`}>
+      <div class="progress" style={`--progress: ${progression()};`} />
       <p class="line">
         <span class="start">{renderPart(line()[0])}</span>{' '}
         <span class="rest">{renderPart(line()[1])}</span>

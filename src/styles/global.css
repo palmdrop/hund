@@ -16,8 +16,9 @@
   --font-size: 12vw;
   /* clamp(var(--min-font-size), 3vw, var(--max-font-size)); */
 
-  --background-color: white;
-  --foreground-color: black;
+  --background-color: rgb(116, 116, 116);
+  --foreground-color: rgb(255, 255, 255);
+  --accent-color: rgb(47, 255, 0);
 }
 
 html {
@@ -28,6 +29,7 @@ html {
   color: var(--foreground-color);
 
   text-transform: uppercase;
+  line-height: var(--line-height);
 }
 
 html,
@@ -38,10 +40,9 @@ html,
 }
 
 main {
-  line-height: var(--line-height);
   position: relative;
-
   padding: 0.2em;
+  z-index: 0;
 }
 
 .line {
@@ -66,5 +67,20 @@ main {
   background-color: var(--foreground-color);
   color: var(--background-color);
   */
-  text-shadow: 0px 0px 0.1em var(--foreground-color);
+  text-shadow:
+    0.01em 0.01em 0.05em var(--foreground-color),
+    -0.01em -0.01em 0.05em var(--foreground-color);
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100vh;
+  background-color: var(--accent-color);
+
+  left: calc(var(--progress) * 100%);
+
+  transition: var(--speed) linear;
 }
