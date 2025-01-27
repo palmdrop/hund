@@ -43,6 +43,11 @@ main {
   position: relative;
   padding: 0.2em;
   z-index: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  overflow: hidden;
 }
 
 .line {
@@ -83,4 +88,27 @@ main {
   left: calc(var(--progress) * 100%);
 
   transition: var(--speed) linear;
+}
+
+.poem-scroller {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+
+  text-align: right;
+
+  font-size: 0.1em;
+
+  --foreground-color: black;
+  color: var(--foreground-color);
+
+  z-index: -1;
+}
+
+.poem-scroller .line.active {
+  --foreground-color: var(--accent-color);
+  color: var(--foreground-color);
 }

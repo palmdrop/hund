@@ -4,10 +4,12 @@ import './styles/global.css';
 
 import { poem } from './content/poem';
 import { onMount, onCleanup, createSignal, createMemo } from 'solid-js';
+import LineRenderer from './components/LineRenderer';
+import PoemScroller from './components/PoemScroller';
 
 const DOG_WORD = 'HUND';
 
-const ANIMATION_SPEED = 500;
+const ANIMATION_SPEED = 800;
 
 const splitOnDog = (text: string) => {
   const dogIndices: number[] = [];
@@ -38,24 +40,39 @@ const splitOnDog = (text: string) => {
   return parts.filter(part => !!part.length);
 };
 
-const lines = poem.lines.map(line =>
-  line.map(part => part.toUpperCase()).map(splitOnDog)
+const lines = poem.lines.map(
+  line => line && line.map(part => part.toUpperCase()).map(splitOnDog)
 );
+
+// TODO: prettify this
+let index = 0;
+const indexedLines = lines.map(line => {
+  const indexedLine = line ? ([index, line] as const) : null;
+  if (line) index++;
+  return indexedLine;
+});
+
+export type IndexedLines = typeof indexedLines;
+
+const linesWithoutNull = lines.filter(Boolean) as Exclude<
+  (typeof poem.lines)[number],
+  null
+>[][];
 
 export default function App() {
   const [index, setIndex] = createSignal(0);
 
   const line = createMemo(() => {
-    return lines[index()];
+    return linesWithoutNull[index()];
   });
 
   const progression = createMemo(() => {
-    return index() / (poem.lines.length - 1);
+    return index() / (linesWithoutNull.length - 1);
   });
 
   onMount(() => {
     const interval = setInterval(() => {
-      setIndex(index => (index + 1) % poem.lines.length);
+      setIndex(index => (index + 1) % linesWithoutNull.length);
     }, ANIMATION_SPEED);
 
     onCleanup(() => {
@@ -63,25 +80,18 @@ export default function App() {
     });
   });
 
-  const renderPart = (part: string[]) => {
-    return part.map(part => (
-      <span
-        classList={{
-          dog: part === DOG_WORD
-        }}
-      >
-        {part}
-      </span>
-    ));
-  };
-
   return (
     <main style={`--speed: ${ANIMATION_SPEED}ms;`}>
       <div class="progress" style={`--progress: ${progression()};`} />
       <p class="line">
-        <span class="start">{renderPart(line()[0])}</span>{' '}
-        <span class="rest">{renderPart(line()[1])}</span>
+        <span class="start">
+          <LineRenderer line={line()[0]} />
+        </span>{' '}
+        <span class="rest">{<LineRenderer line={line()[1]} />}</span>
       </p>
+      <div class="poem">
+        <PoemScroller index={index()} lines={indexedLines} />
+      </div>
     </main>
   );
 }
