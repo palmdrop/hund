@@ -16,9 +16,10 @@
   --font-size: 12vw;
   /* clamp(var(--min-font-size), 3vw, var(--max-font-size)); */
 
-  --background-color: rgb(116, 116, 116);
+  --background-color: rgb(117, 117, 117);
   --foreground-color: rgb(255, 255, 255);
-  --accent-color: rgb(47, 255, 0);
+  --secondary-foreground-color: rgb(0, 0, 255);
+  --accent-color: rgb(68, 255, 0);
 }
 
 html {
@@ -92,20 +93,21 @@ main {
 
 .poem-scroller {
   position: absolute;
-  left: 0;
+  right: 0;
   top: 0;
-  width: 100%;
   height: 100vh;
   overflow: auto;
 
-  text-align: right;
+  text-align: left;
 
   font-size: 0.1em;
 
-  --foreground-color: black;
+  --foreground-color: var(--secondary-foreground-color);
   color: var(--foreground-color);
 
   z-index: -1;
+
+  line-height: 1.25em;
 }
 
 .poem-scroller .line.active {
