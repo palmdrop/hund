@@ -92,6 +92,7 @@ export default function App() {
       <div class="poem">
         <PoemScroller index={index()} lines={indexedLines} />
       </div>
+      <div class="sphere" />
     </main>
   );
 }

@@ -8,18 +8,30 @@
 
   --max-font-size: 100px;
   --min-font-size: 60px;
-  --line-height: 1em;
+  --line-height: 1.05em;
 
   --max-width: 25em;
   --canvas-padding: 4.9rem;
 
   --font-size: 12vw;
-  /* clamp(var(--min-font-size), 3vw, var(--max-font-size)); */
 
-  --background-color: rgb(117, 117, 117);
-  --foreground-color: rgb(255, 255, 255);
+  --background-color: rgb(197, 195, 195);
+  --foreground-color: rgb(18, 17, 17);
   --secondary-foreground-color: rgb(0, 0, 255);
   --accent-color: rgb(68, 255, 0);
+
+  /*
+  --background-color: rgb(239, 235, 231);
+  --foreground-color: rgb(26, 25, 25);
+  --secondary-foreground-color: rgb(128, 122, 70);
+  --accent-color: rgb(255, 0, 0);
+  */
+  --background-color: rgb(139, 139, 139);
+  --foreground-color: rgb(3, 3, 3);
+  --secondary-foreground-color: rgb(255, 255, 255);
+  --accent-color: rgb(170, 255, 0);
+
+  --edge-padding: 0.2em;
 }
 
 html {
@@ -42,7 +54,7 @@ html,
 
 main {
   position: relative;
-  padding: 0.2em;
+  padding: var(--edge-padding);
   z-index: 0;
 
   width: 100%;
@@ -57,8 +69,6 @@ main {
 .start {
   display: inline-block;
   width: 100%;
-
-  text-transform: uppercase;
 }
 
 .rest {
@@ -108,9 +118,29 @@ main {
   z-index: -1;
 
   line-height: 1.25em;
+  padding: var(--edge-padding);
 }
 
 .poem-scroller .line.active {
   --foreground-color: var(--accent-color);
   color: var(--foreground-color);
+}
+
+.sphere {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 25vw;
+  height: 25vw;
+
+  border-radius: 100%;
+
+  /*
+  background-color: var(--secondary-foreground-color);
+  */
+  background-color: var(--accent-color);
+
+  z-index: -4;
 }
