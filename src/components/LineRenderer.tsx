@@ -9,7 +9,8 @@ const LineRenderer = (props: { line: PoemLine }) => {
         {part => (
           <span
             classList={{
-              dog: DOG_WORDS.includes(part)
+              dog: DOG_WORDS.includes(part),
+              emphasized: DOG_WORDS.includes(part)
             }}
           >
             {part}

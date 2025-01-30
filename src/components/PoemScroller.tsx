@@ -10,9 +10,6 @@ const PoemScroller = (props: { index: number; lines: IndexedLines }) => {
     const element = lines.get(props.index);
     if (!element) return;
 
-    // TODO: only scroll IF its sufficiently close to the edge... and add some offset!
-    // line.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
     const elementRect = element.getBoundingClientRect();
     const rootRect = root.getBoundingClientRect();
 
@@ -21,16 +18,18 @@ const PoemScroller = (props: { index: number; lines: IndexedLines }) => {
 
     const padding = rootRect.height * 0.8;
     const scrollActivationPadding = rootRect.height * 0.1;
-    // (Math.random() * 0.2 + 0.05);
 
+    let scrollTop: number | undefined = undefined;
     if (deltaTop < scrollActivationPadding) {
-      root.scrollBy({
-        top: deltaTop - padding,
-        behavior: 'smooth'
-      });
+      scrollTop = deltaTop - padding;
     } else if (deltaBottom > -scrollActivationPadding) {
+      scrollTop = deltaBottom + padding;
+    }
+
+    // TODO: slow scroll?
+    if (typeof scrollTop === 'number') {
       root.scrollBy({
-        top: deltaBottom + padding,
+        top: scrollTop,
         behavior: 'smooth'
       });
     }

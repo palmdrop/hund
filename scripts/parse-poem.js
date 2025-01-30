@@ -18,9 +18,14 @@ const parsePoem = async () => {
       return [start, line.slice(start.length).trim()];
     });
 
+  let endingNulls = lines.length;
+  do {
+    if (lines[endingNulls - 1] !== null) break;
+  } while (endingNulls--);
+
   const data = `
 export const poem = {
-  lines: ${JSON.stringify(lines, null, 2)}
+  lines: ${JSON.stringify(lines.slice(0, endingNulls), null, 2)}
 };
     `;
 
