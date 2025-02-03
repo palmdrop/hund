@@ -3,11 +3,11 @@ import './styles/fonts.css';
 import './styles/global.css';
 
 import PoemAnimation from './components/PoemAnimation';
-import PoemPrint from './components/PoemPrint';
+// import PoemPrint from './components/PoemPrint';
 import { poem } from './content/poem';
 
 const DOG_WORD = 'HUND';
-const ANIMATION_SPEED = 800;
+const ANIMATION_SPEED = 1500;
 
 const splitOnDog = (text: string) => {
   const dogIndices: number[] = [];
@@ -62,7 +62,6 @@ const linesWithoutNull = lines.filter(Boolean) as Exclude<
 >[][];
 
 export default function App() {
-  /*
   return (
     <PoemAnimation
       lines={indexedLines}
@@ -70,6 +69,5 @@ export default function App() {
       animationSpeed={ANIMATION_SPEED}
     />
   );
-  */
-  return <PoemPrint lines={lines} />;
+  // return <PoemPrint lines={lines} />;
 }

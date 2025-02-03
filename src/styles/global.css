@@ -31,6 +31,10 @@
   --foreground-color: rgb(3, 3, 3);
   --secondary-foreground-color: rgb(255, 255, 255);
   --accent-color: rgb(170, 255, 0);
+  /*
+  --accent-background-color: rgb(170, 255, 0);
+  */
+  --accent-background-color: var(--accent-color);
 
   --edge-padding: 0.2em;
 }
@@ -64,6 +68,11 @@ main {
   overflow: hidden;
 }
 
+.step {
+  transition: 0.1s;
+  animation: background-flicker calc(var(--speed) * 0.3);
+}
+
 .active-line {
   height: 100%;
 }
@@ -94,6 +103,16 @@ main {
   text-shadow:
     0.01em 0.01em 0.04em var(--foreground-color),
     -0.01em -0.01em 0.04em var(--foreground-color);
+
+  filter: blur(0.005em);
+}
+
+.line {
+  filter: blur(0.02em);
+}
+
+.active-line {
+  filter: blur(0.007em);
 }
 
 .progress {
@@ -106,7 +125,11 @@ main {
 
   left: calc(var(--progress) * 100%);
 
-  transition: var(--speed) linear;
+  animation: progress-flicker calc(var(--speed) * 0.1) infinite alternate;
+}
+
+.progress.animate {
+  transition: var(--speed) ease-out;
 }
 
 .poem-scroller {
@@ -151,4 +174,27 @@ main {
   background-color: var(--accent-color);
 
   z-index: -4;
+
+  filter: blur(0.025em);
+}
+
+@keyframes progress-flicker {
+  from {
+    filter: blur(0.005em);
+  }
+  to {
+    filter: blur(0.015em);
+  }
+}
+
+@keyframes background-flicker {
+  0% {
+    background-color: var(--background-color);
+  }
+  25% {
+    background-color: var(--accent-background-color);
+  }
+  100% {
+    background-color: var(--background-color);
+  }
 }
