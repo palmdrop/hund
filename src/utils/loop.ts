@@ -1,5 +1,8 @@
-// eslint-disable-next-line no-unused-vars
-export const createLoop = (rate: number, callback: (delta: number) => void) => {
+export const createLoop = (
+  rate: number,
+  // eslint-disable-next-line no-unused-vars
+  callback: (delta: number) => void | boolean
+) => {
   let animationFrame: number;
 
   let then = Date.now();
@@ -11,19 +14,24 @@ export const createLoop = (rate: number, callback: (delta: number) => void) => {
 
     if (delta > rate) {
       then = now - (delta % rate);
-      callback(delta);
+      const result = callback(delta);
+      if (typeof result === 'boolean' && !result) return;
     }
 
     animationFrame = requestAnimationFrame(animate);
   };
 
-  const start = () => {
-    then = Date.now();
-    animate();
+  const stop = () => {
+    console.log('stop');
+    if (!animationFrame) return;
+    cancelAnimationFrame(animationFrame);
   };
 
-  const stop = () => {
-    cancelAnimationFrame(animationFrame);
+  const start = () => {
+    console.log('start');
+    stop();
+    then = Date.now();
+    animate();
   };
 
   return {

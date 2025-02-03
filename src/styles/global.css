@@ -31,10 +31,14 @@
   --foreground-color: rgb(3, 3, 3);
   --secondary-foreground-color: rgb(255, 255, 255);
   --accent-color: rgb(170, 255, 0);
+
+  --shadow-color: var(--foreground-color);
   /*
   --accent-background-color: rgb(170, 255, 0);
   */
   --accent-background-color: var(--accent-color);
+
+  --reset-color: red;
 
   --edge-padding: 0.2em;
 }
@@ -92,7 +96,11 @@ main {
   width: 100%;
 }
 
-.rest {
+.resetting {
+  background-color: var(--reset-color);
+  color: var(--accent-background-color);
+
+  --foreground-color: var(--accent-background-color);
 }
 
 .dog {
