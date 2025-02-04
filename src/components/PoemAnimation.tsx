@@ -1,31 +1,48 @@
 import { onMount, onCleanup, createSignal, createMemo } from 'solid-js';
 import LineRenderer from '../components/LineRenderer';
 import PoemScroller from '../components/PoemScroller';
-import { IndexedLines } from '~/app';
+import { IndexedLines, LinesWithoutNull } from '~/app';
 import { createLoop } from '~/utils/loop';
 
-// TODO: when resetting, show image as background?
 export default function PoemAnimation(props: {
   lines: IndexedLines;
-  linesWithoutNull: string[][][];
-  animationSpeed: number;
+  linesWithoutNull: LinesWithoutNull;
 }) {
-  const [index, setIndex] = createSignal(props.linesWithoutNull.length - 2);
+  const [settings, setSettings] = createSignal(
+    props.linesWithoutNull[0][2] ?? {
+      speed: 1500,
+      pulseIterations: 1,
+      pulseAnimationDuration: 0.3
+    }
+  );
+
+  const [index, setIndex] = createSignal(85);
   const [stepClassActive, setStepClassActive] = createSignal(false);
 
   const [resetting, setResetting] = createSignal(false);
 
-  const mainLoop = createLoop(props.animationSpeed, () => {
+  const stepPulse = () => {
+    setStepClassActive(true);
+    return setTimeout(() => setStepClassActive(false), settings().speed * 0.95);
+  };
+
+  const mainLoop = createLoop(settings().speed, () => {
     const nextIndex = index() + 1;
     if (nextIndex < props.linesWithoutNull.length) {
       setIndex(nextIndex);
+
+      const [, , nextSettings] = props.linesWithoutNull[nextIndex];
+      if (nextSettings) {
+        setSettings(nextSettings);
+        mainLoop.setRate(nextSettings.speed);
+      }
     }
 
-    setStepClassActive(true);
-    setTimeout(() => setStepClassActive(false), props.animationSpeed / 2);
+    const stepTimeout = stepPulse();
 
     if (nextIndex === props.linesWithoutNull.length) {
       setResetting(true);
+      clearTimeout(stepTimeout);
       setStepClassActive(false);
 
       resetLoop.start();
@@ -33,13 +50,21 @@ export default function PoemAnimation(props: {
     }
   });
 
-  const resetLoop = createLoop(props.animationSpeed * 0.01, () => {
+  const resetLoop = createLoop(1, () => {
     const nextIndex = index() - 1;
     setIndex(nextIndex);
 
     if (nextIndex <= 0) {
       setResetting(false);
-      setStepClassActive(false);
+      stepPulse();
+
+      const [, , firstSettings] = props.linesWithoutNull[0];
+      mainLoop.setRate(firstSettings?.speed ?? 1500);
+
+      if (firstSettings) {
+        setSettings(firstSettings);
+      }
+
       mainLoop.start();
       return false;
     }
@@ -63,7 +88,11 @@ export default function PoemAnimation(props: {
 
   return (
     <main
-      style={`--speed: ${props.animationSpeed}ms;`}
+      style={`
+        --speed: ${settings().speed}ms;
+        --pulse-animation-duration: ${settings().pulseAnimationDuration};
+        --pulse-iterations: ${settings().pulseIterations};
+      `}
       classList={{
         step: stepClassActive(),
         resetting: resetting()

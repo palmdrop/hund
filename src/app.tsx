@@ -5,9 +5,9 @@ import './styles/global.css';
 import PoemAnimation from './components/PoemAnimation';
 // import PoemPrint from './components/PoemPrint';
 import { poem } from './content/poem';
+import { Settings } from './types';
 
 const DOG_WORD = 'HUND';
-const ANIMATION_SPEED = 1500;
 
 const splitOnDog = (text: string) => {
   const dogIndices: number[] = [];
@@ -38,9 +38,17 @@ const splitOnDog = (text: string) => {
   return parts.filter(part => !!part.length);
 };
 
-const lines = poem.lines.map(
-  line => line && line.map(part => part.toUpperCase()).map(splitOnDog)
-);
+const lines = poem.lines.map(line => {
+  if (!line) return null;
+
+  const [start, rest, settings] = line;
+
+  return [
+    splitOnDog((start as string).toUpperCase()),
+    splitOnDog((rest as string).toUpperCase()),
+    settings
+  ] as const;
+});
 
 export type Lines = typeof lines;
 
@@ -56,18 +64,17 @@ const indexedLines = lines.map(line => {
 export type IndexedLines = typeof indexedLines;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-const linesWithoutNull = lines.filter(Boolean) as Exclude<
-  (typeof poem.lines)[number],
-  null
->[][];
+const linesWithoutNull = lines.filter(Boolean) as [
+  string[],
+  string[],
+  Settings | null
+][];
+
+export type LinesWithoutNull = typeof linesWithoutNull;
 
 export default function App() {
   return (
-    <PoemAnimation
-      lines={indexedLines}
-      linesWithoutNull={linesWithoutNull}
-      animationSpeed={ANIMATION_SPEED}
-    />
+    <PoemAnimation lines={indexedLines} linesWithoutNull={linesWithoutNull} />
   );
   // return <PoemPrint lines={lines} />;
 }

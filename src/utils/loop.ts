@@ -22,20 +22,23 @@ export const createLoop = (
   };
 
   const stop = () => {
-    console.log('stop');
     if (!animationFrame) return;
     cancelAnimationFrame(animationFrame);
   };
 
   const start = () => {
-    console.log('start');
     stop();
     then = Date.now();
     animate();
   };
 
+  const setRate = (newRate: number) => {
+    rate = newRate;
+  };
+
   return {
     start,
-    stop
+    stop,
+    setRate
   };
 };

@@ -73,8 +73,9 @@ main {
 }
 
 .step {
-  transition: 0.1s;
-  animation: background-flicker calc(var(--speed) * 0.3);
+  animation: background-flicker
+    calc(var(--speed) * var(--pulse-animation-duration));
+  animation-iteration-count: var(--pulse-iterations);
 }
 
 .active-line {
@@ -182,6 +183,7 @@ main {
   z-index: -4;
 
   filter: blur(0.025em);
+  animation: sphere-flicker calc(var(--speed) * 0.1) infinite;
 }
 
 @keyframes progress-flicker {
@@ -193,12 +195,27 @@ main {
   }
 }
 
+@keyframes sphere-flicker {
+  0% {
+    filter: blur(0.025em);
+  }
+  50% {
+    filter: blur(0.022em);
+  }
+  100% {
+    filter: blur(0.025em);
+  }
+}
+
 @keyframes background-flicker {
   0% {
     background-color: var(--background-color);
   }
   25% {
     background-color: var(--accent-background-color);
+  }
+  50% {
+    background-color: var(--background-color);
   }
   100% {
     background-color: var(--background-color);
