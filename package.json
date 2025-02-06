@@ -3,7 +3,8 @@
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",
-    "prebuild": "bash ./scripts/setup.sh",
+    "process": "bash ./scripts/setup.sh",
+    "prebuild": "pnpm run process",
     "build": "vinxi build",
     "raw-build": "vinxi build",
     "start": "vinxi start",
