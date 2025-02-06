@@ -31,11 +31,11 @@ Nästa hund flår
 Nästa hund flår en annan
 Nästa hund bär en kappa
 Nästa hund bär en kappa av svart päls
-Nästa hund nosar tätt inpå huden
 Nästa hund blottar tänderna
 Nästa hund blottar mer än så
 Nästa hund har så många tänder
 Nästa hund har så mycket mer
+Nästa hund nosar tätt inpå huden
 Nästa hund är svart som tjära
 Nästa hund sväljer utan att tugga
 Nästa hund sväljer sin tunga
@@ -94,7 +94,7 @@ Hundhunden gapar så stort
 Hundhunden har en hund i käften
 Hundhunden har tusen hundar i käften
 Hundhunden är ett svart yrväder
-Hundhunden yr över kustlinjen
+Hundhunden yr över kusten
 Hundhunden växer och växer
 Hundhunden är hund av hund
 Hundhunden är hund av hundhund
