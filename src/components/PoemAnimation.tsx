@@ -16,7 +16,7 @@ export default function PoemAnimation(props: {
     }
   );
 
-  const [index, setIndex] = createSignal(/*85*/ 0);
+  const [index, setIndex] = createSignal(0);
   const [stepClassActive, setStepClassActive] = createSignal(false);
 
   const [resetting, setResetting] = createSignal(false);

@@ -29,6 +29,4 @@ gitignore
 Thumbs.db
 
 screenshots
-src/content/*
-!src/content/poems
-src/content/poems/*.ts
+src/content/poem.ts
