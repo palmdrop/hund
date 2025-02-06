@@ -6,11 +6,7 @@ const PoemRenderer = (props: { lines: Lines }) => {
   return (
     <For each={props.lines}>
       {line => (
-        <p
-          classList={{
-            line: true
-          }}
-        >
+        <p class="line">
           <Show when={!!line} fallback={<br />}>
             {line && (
               <>

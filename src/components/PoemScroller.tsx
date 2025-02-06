@@ -26,7 +26,6 @@ const PoemScroller = (props: { index: number; lines: IndexedLines }) => {
       scrollTop = deltaBottom + padding;
     }
 
-    // TODO: slow scroll?
     if (typeof scrollTop === 'number') {
       root.scrollBy({
         top: scrollTop,
