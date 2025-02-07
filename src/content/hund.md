@@ -50,8 +50,8 @@ Nästa hund sliter loss sin egen svans
 Ingen hund är tyst
 Ingen hund är tyst eller ren
 Ingen hund är rädd eller skamsen
-Ingen hund rymmer härifrån
 Ingen hund lämnar parkeringen
+Ingen hund rymmer därifrån
 Ingen hund dricker från pölen
 Ingen hund skäller
 Ingen hund ser
