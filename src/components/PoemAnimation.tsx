@@ -80,6 +80,7 @@ export default function PoemAnimation(props: {
 
   onMount(() => {
     mainLoop.start();
+    stepPulse();
     onCleanup(() => {
       mainLoop.stop();
       resetLoop.stop();
