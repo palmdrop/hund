@@ -2,7 +2,7 @@ import { defineConfig } from '@solidjs/start/config';
 
 export default defineConfig({
   server: {
-    baseURL: '/',
+    baseURL: '/hund',
     preset: 'static'
   }
 });
