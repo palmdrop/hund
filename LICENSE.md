@@ -1,6 +1,6 @@
-# Poems
+# Poem
 
-The files containing the poems and other creative text material are located in `src/content`. All files in this folder are directly copyrighted to Anton Hildingsson (palmdrop). All rights reserved.
+All files in `src/content` are directly copyrighted to Anton Hildingsson (palmdrop). All rights reserved.
 
 # Code
 
@@ -8,7 +8,7 @@ All the code located in `src`, with the exception of the files inside `src/conte
 
 ## MIT License
 
-Copyright (c) 2024 Anton Hildingsson
+Copyright (c) 2025 Anton Hildingsson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

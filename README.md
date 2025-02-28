@@ -1,17 +1,12 @@
-# Lös Monolit
+# Black Dog on The Beach
 
-**Live at [palmdrop.github.io/los-monolit](https://palmdrop.github.io/los-monolit)**
+[**live at palmdrop.github.io**](https://palmdrop.github.io/hund)
 
-"Lös Monolith" (Loose monolith) is a visual poetry project based on two poems, written by me (found in `src/content/poems`), and two are.na channels ([`stupid-office-words`](https://www.are.na/didier-l/stupid-office-words) and [`vibin in the office aedificium`](https://are.na/palmdrop/vibin-in-the-office-aedificium)).
+An animated poem about dogs and dogdogs for an exhibition.
 
-# License
+Built with:
 
-License is specified in `LICENSE.md`. Please note that the code and poem contents are covered by different licenses.
+- Solidjs
+- Solidjs/start
 
-# Tools
-
-- [SolidStart](https://start.solidjs.com/)
-
-# Example
-
-![Example render](.github/example.jpg)
+Please note: [license](./LICENSE.md).
